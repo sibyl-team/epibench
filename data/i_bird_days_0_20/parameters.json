@@ -1,0 +1,14 @@
+{
+ "type_graph": "i_bird_days_0_20",
+ "t_limit": 20,
+ "gamma": 0.002,
+ "mu": 0.1,
+ "seed": 1,
+ "n": 356,
+ "p_tested": 0.01,
+ "p_asymptomatic": 0.5,
+ "p_delay_symptoms": {
+  "1": 0.2,
+  "2": 0.8
+ }
+}
