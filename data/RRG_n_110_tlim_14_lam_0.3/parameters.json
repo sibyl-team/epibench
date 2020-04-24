@@ -1,0 +1,14 @@
+{
+ "type_graph": "RRG",
+ "t_limit": 14,
+ "lambda": 0.3,
+ "mu": 0.2,
+ "seed": 1,
+ "n": 110,
+ "p_tested": 0.01,
+ "p_asymptomatic": 0.5,
+ "p_delay_symptoms": {
+  "1": 0.7,
+  "2": 0.30000000000000004
+ }
+}
