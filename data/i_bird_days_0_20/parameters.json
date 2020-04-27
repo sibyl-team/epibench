@@ -1,7 +1,7 @@
 {
  "type_graph": "i_bird_days_0_20",
  "t_limit": 20,
- "damma": 0.004,
+ "gamma": 0.004,
  "mu": 0.1,
  "seed": 1,
  "n": 356,
