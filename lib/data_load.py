@@ -47,7 +47,7 @@ CONTACTS_DTYPES = dict(zip(NAMES_COLS_CONTACTS,(np.int,np.int,np.int,np.float) )
 
 def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
     """
-    Load only the binary formatted files
+    Load only the binary formatted files from folder "folder_path"
     """
     fold = Path(folder_path)
     if not fold.exists():
@@ -80,6 +80,9 @@ def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
     return params,contacts,observ,epid_stacked
 
 def convert_obs_to_df(globs):
+    """
+    Transform obs from dictionaries to DataFrames
+    """
     import itertools
     STATE_MAP = {"S":0,"I":1,"R":2}
     columns=["st","i","t"]
