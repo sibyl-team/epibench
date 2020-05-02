@@ -17,7 +17,16 @@ We provide a database of instances to address the following inference problems:
 
 See the [README](./data/README.md) in the folder ```./data/```
 
+## Results
+In the folder ```results``` are the results obtained by various techniques on the instances proposed. If you want to add yours results make a pull request or write us: [sybil-team](mailto:sybilteam@gmail.com?subject=[GitHub]%20Source%20Han%20Sans).
+
+
 ## Credits:
 
-1. The contacts lists of i_bird_days_20 is derived from: ...
-2. The contacts lists of sp_work13 is derived from the work: ....
+1. The contacts lists of ```i_bird_days_20``` is derived from: ...
+2. The contacts lists of ```sp_work13``` is derived from the work: ....
+3. The instances of ```OpenABM``` are generated with [OpenABM]() github repository gentle provided by [Luca Ferretti](https://www.bdi.ox.ac.uk/Team/luca-ferretti). The selections of partial observations are made with  routines developed by [SPHINX-teams](https://github.com/sphinxteam/sir_inference).
+
+
+## Mainteiners:
+[sybil-team](https://github.com/sibyl-team)
