@@ -1,7 +1,7 @@
 # epibench
 The evolution of the 2019–20 coronavirus pandemic has made clear the need to quickly contain the outbreaks of infections. One of the strategies used is to trace the contacts of people found positive and quickly isolate the new infected founds. Governments and institutions are working to implement contact tracking through IT technologies and mobile apps. The purpose of this repository is to provide a common database where inference algorithms can be tested. The inference problems addressed rely on having detailed contacts information among individuals observed. We assume that compartmental models (like SIS, SIR, SEIR etc..) govern the dynamics of the systems. We provide several different instances for several different inference problems.
 
-## inference problems
+## Inference problems
 
 We provide a database of instances to address the following inference problems:
 
