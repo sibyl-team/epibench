@@ -93,7 +93,7 @@ def convert_obs_to_json(df,name_state="st",name_t = "t",name_node="i"):
             d[sname][ti] = list(grouptime[name_node])
     return d
 
-def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
+def load_exported_data(folder_path,epidemies_with_name=False,obs_dataframe=True):
     """
     Load only the binary formatted files from folder "folder_path"
     """
@@ -105,7 +105,7 @@ def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
         params = json.load(f)
 
     with bz2.open(fold/(CONTACTS_FNAME),"r") as f:
-        if pandas_df:
+        if obs_dataframe:
             contacts = pd.read_csv(f,names=NAMES_COLS_CONTACTS,dtype=CONTACTS_DTYPES)
         else:
             contacts = np.loadtxt(f,delimiter=",")
@@ -117,7 +117,7 @@ def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
     else:
         print("No observations found")
         observ = None
-    if pandas_df:
+    if obs_dataframe:
         obs_out = [convert_obs_to_df(o) for o in observ]
     else:
         obs_out = observ
@@ -140,11 +140,11 @@ def save_data_exported(base_path,name_instance,pars,num_inst,contacts,
     Export inference problem instance, complete with observations and epidemies
     """
     if obs_all_json is None and obs_all_df is None:
-        raise ValueError("Give the observations both in ")
+        raise ValueError("Give the observations in JSON or DataFrame format")
     if obs_all_df is None:
         obs_all_df = [convert_obs_to_df(o) for o in obs_all_json]
     elif obs_all_json is None:
-        obs_all_json = [convert_obs_to_json(df,name_node_obs,name_t_obs,name_node_obs) for df in obs_all_df]
+        obs_all_json = [convert_obs_to_json(df,name_state_obs,name_t_obs,name_node_obs) for df in obs_all_df]
 
     num_nodes = pars["n"]
 
