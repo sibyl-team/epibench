@@ -140,14 +140,16 @@ def load_exported_data(folder_path, epidemies_with_name=False, obs_dataframe=Tru
     return params, contacts, obs_out, epid_stacked
 
 
-def save_data_exported(base_path, name_instance, pars, num_inst, contacts,
-                       full_epidemies, obs_all_json=None, obs_all_df=None,
+def save_data_exported(base_path, name_instance, pars, contacts,
+                       full_epidemies, obs_all_json=None, obs_all_df=None, num_inst=None,
                        name_state_obs="st", name_t_obs="t", name_node_obs="i"):
     """
     Export inference problem instance, complete with observations and epidemies
 
     the data is saved in the folder "base_path/name_instance", so watch out to avoid 
     overwriting previously saved data!
+
+    num_inst is the number of instances present in the data that will be saved
 
     the name_* parameters are used when the observations are converted from a dataframe 
     into a dictionary, they indicate the name of the columns to use for the conversion 
@@ -161,6 +163,9 @@ def save_data_exported(base_path, name_instance, pars, num_inst, contacts,
     elif obs_all_json is None:
         obs_all_json = [convert_obs_to_json(
             df, name_state_obs, name_t_obs, name_node_obs) for df in obs_all_df]
+
+    if num_inst is None:
+        num_inst = len(obs_all_json)
 
     num_nodes = pars["n"]
 
