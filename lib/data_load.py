@@ -45,6 +45,53 @@ CONTACTS_DTYPES = dict(zip(NAMES_COLS_CONTACTS,(np.int,np.int,np.int,np.float) )
 STATE_MAP = {"S":0,"I":1,"R":2}
 STATE_INVERSE_MAP =  {v: k for k, v in STATE_MAP.items()}
 
+class FileDecoder(json.JSONDecoder):
+    #thanks to https://stackoverflow.com/questions/45068797/how-to-convert-string-int-json-into-real-int-with-json-loads
+    def decode(self, s):
+        result = super().decode(s)
+        return self._decode(result)
+
+    def _decode(self, o):
+        if isinstance(o, str):
+            try:
+                return int(o)
+            except ValueError:
+                return o
+        elif isinstance(o, dict):
+            out_d = {}
+            for k, v in o.items():
+                try:
+                    c = int(k)
+                except ValueError:
+                    c = k
+                out_d[c] = self._decode(v)
+            return out_d
+        elif isinstance(o, list):
+            return [self._decode(v) for v in o]
+        else:
+            return o
+
+def convert_obs_to_df(globs,columns=["st","i","t"]):
+    """
+    Transform observations from a dictionary to a DataFrame
+    """
+    import itertools
+
+    all_dfs = []
+    for state,obse in globs.items():
+        v = STATE_MAP[state]
+        for t, nodes in obse.items():
+            data_iter = itertools.product([v],nodes,[int(t)])
+            all_dfs.append(pd.DataFrame(data_iter,columns=columns))
+    return pd.concat(all_dfs,ignore_index=True)
+
+def convert_obs_to_json(df,name_state="st",name_t = "t",name_node="i"):
+    d = {k:{} for k in STATE_MAP.keys()}
+    for si, grs in df.groupby(name_state):
+        sname = STATE_INVERSE_MAP[si]
+        for ti, grouptime in grs.groupby(name_t):
+            d[sname][ti] = list(grouptime[name_node])
+    return d
 
 def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
     """
@@ -66,10 +113,14 @@ def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
     file_all_obs = fold / ALL_OBS_FILE
     if file_all_obs.exists():
         with bz2.open(file_all_obs,"rt") as f:
-            observ = json.load(f)
+            observ = json.load(f,cls=FileDecoder)
     else:
         print("No observations found")
         observ = None
+    if pandas_df:
+        obs_out = [convert_obs_to_df(o) for o in observ]
+    else:
+        obs_out = observ
     
     all_epi = np.load(fold/(ALL_EPI+".npz"))
     epids = all_epi.files
@@ -78,33 +129,22 @@ def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
     r.sort()    
     epid_stacked = np.stack([all_epi[name] for i,name in r])
 
-    return params,contacts,observ,epid_stacked
+    return params,contacts,obs_out,epid_stacked
 
-def convert_obs_to_df(globs,columns=["st","i","t"]):
-    """
-    Transform observations from dictionaries to DataFrames
-    """
-    import itertools
 
-    all_dfs = []
-    for state,obse in globs.items():
-        v = STATE_MAP[state]
-        for t, nodes in obse.items():
-            data_iter = itertools.product([v],nodes,[int(t)])
-            all_dfs.append(pd.DataFrame(data_iter,columns=columns))
-    return pd.concat(all_dfs)
 
 def save_data_exported(base_path,name_instance,pars,num_inst,contacts,
-                       full_epidemies,obs_all_json=None,obs_all_df=None):
+                       full_epidemies,obs_all_json=None,obs_all_df=None,
+                       name_state_obs="st",name_t_obs = "t",name_node_obs="i"):
     """
     Export inference problem instance, complete with observations and epidemies
     """
     if obs_all_json is None and obs_all_df is None:
         raise ValueError("Give the observations both in ")
     if obs_all_df is None:
-        obs_all_df = convert_obs_to_df(obs_all_json)
+        obs_all_df = [convert_obs_to_df(o) for o in obs_all_json]
     elif obs_all_json is None:
-        pass
+        obs_all_json = [convert_obs_to_json(df,name_node_obs,name_t_obs,name_node_obs) for df in obs_all_df]
 
     num_nodes = pars["n"]
 
