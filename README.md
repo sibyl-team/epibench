@@ -13,9 +13,11 @@ We provide a database of instances to address the following inference problems:
 
 1. More coming...
 
-## Database structures
+## Using the data
 
-See the [README](./data/README.md) in the folder ```./data/```
+The data format is specified in the [README](./data/README.md) in the folder ```./data/```
+
+For reference and for convenience, a Python script can be found in the `lib` folder which can be used to save and load the different instances.
 
 ## Results
 In the folder ```results``` are the results obtained by various techniques on the instances proposed. If you want to add yours results make a pull request or write us: [sybil-team](mailto:sybilteam@gmail.com?subject=[GitHub]%20Source%20Han%20Sans).
