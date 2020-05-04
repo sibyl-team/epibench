@@ -16,7 +16,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-
 """
 import numpy as np
 import pandas as pd
@@ -43,6 +42,8 @@ ALL_EPI = "all_epidemies"
 NAMES_COLS_CONTACTS = ["t","i","j","lambda"]
 CONTACTS_DTYPES = dict(zip(NAMES_COLS_CONTACTS,(np.int,np.int,np.int,np.float) ))
 
+STATE_MAP = {"S":0,"I":1,"R":2}
+STATE_INVERSE_MAP =  {v: k for k, v in STATE_MAP.items()}
 
 
 def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
@@ -79,14 +80,12 @@ def load_exported_data(folder_path,epidemies_with_name=False,pandas_df=True):
 
     return params,contacts,observ,epid_stacked
 
-def convert_obs_to_df(globs):
+def convert_obs_to_df(globs,columns=["st","i","t"]):
     """
-    Transform obs from dictionaries to DataFrames
+    Transform observations from dictionaries to DataFrames
     """
     import itertools
-    STATE_MAP = {"S":0,"I":1,"R":2}
-    columns=["st","i","t"]
-    
+
     all_dfs = []
     for state,obse in globs.items():
         v = STATE_MAP[state]
@@ -94,4 +93,64 @@ def convert_obs_to_df(globs):
             data_iter = itertools.product([v],nodes,[int(t)])
             all_dfs.append(pd.DataFrame(data_iter,columns=columns))
     return pd.concat(all_dfs)
+
+def save_data_exported(base_path,name_instance,pars,num_inst,contacts,
+                       full_epidemies,obs_all_json=None,obs_all_df=None):
+    """
+    Export inference problem instance, complete with observations and epidemies
+    """
+    if obs_all_json is None and obs_all_df is None:
+        raise ValueError("Give the observations both in ")
+    if obs_all_df is None:
+        obs_all_df = convert_obs_to_df(obs_all_json)
+    elif obs_all_json is None:
+        pass
+
+    num_nodes = pars["n"]
+
+    folder = Path(base_path) / name_instance
+    
+    if not folder.exists():
+        folder.mkdir(parents=True)
+
+    save_json(pars,folder/PARAMS_FNAME)
+
+    with bz2.open(folder/(CONTACTS_FNAME),"w") as f:
+        np.savetxt(f,contacts,delimiter=",")
+
+    if obs_all_json is not None:
+        with bz2.open(folder/(ALL_OBS_FILE),"wt") as f:
+            json.dump(obs_all_json,f,indent=1)
+
+    title_epi = " ,".join(["{}".format(i) for i in range(num_nodes)])
+
+
+    for  i in range(num_inst):
+        epi = full_epidemies[i]
+        
+        tf = tarfile.open(folder/"instance_{:03d}.tar.bz2".format(i),"w:bz2")
+        epidemy_name = EPI_NAME+"_{:02d}.csv".format(i)
+        observ_name = OBS_NAME + "_{:02d}.csv".format(i)
+
+        np.savetxt(epidemy_name,epi,"%d",delimiter=",",header=title_epi)
+        tf.add(epidemy_name)
+
+        if obs_all_df is not None:
+            observ = obs_all_df[i]
+            observ.to_csv(observ_name,index=False)
+            tf.add(observ_name)
+            tf.close()
+            # delete files
+            f = Path(observ_name)
+            f.unlink()
+        else:
+            tf.close()        
+        
+        f = Path(epidemy_name)
+        f.unlink()
+    
+    d_epid = dict(zip(["epi_{}".format(v) for v in range(num_inst)],full_epidemies))
+    np.savez_compressed(folder/"all_epidemies",**d_epid)
+    print("Saved on "+folder.as_posix())
+
     
