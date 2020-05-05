@@ -20,14 +20,12 @@ The data format is specified in the [README](./data/README.md) in the folder ```
 For reference and for convenience, a Python script can be found in the `lib` folder which can be used to save and load the different instances.
 
 ## Results
-In the folder ```results``` are the results obtained by various techniques on the instances proposed. If you want to add yours results make a pull request or write us: [sybil-team](mailto:sybilteam@gmail.com?subject=[GitHub]%20Source%20Han%20Sans).
+In the folder ```results``` are the results obtained by various techniques on the instances proposed. If you want to add yours results make a pull request or write us: [sybil-team](mailto:sibylteam@gmail.com?subject=[GitHub]%20Source%20epibench).
 
 
 ## Credits:
 
-1. The contacts lists of ```i_bird_days_20``` is derived from: ...
-2. The contacts lists of ```sp_work13``` is derived from the work: ....
-3. The instances of ```OpenABM``` are generated with [OpenABM]() github repository gentle provided by [Luca Ferretti](https://www.bdi.ox.ac.uk/Team/luca-ferretti). The selections of partial observations are made with  routines developed by [SPHINX-teams](https://github.com/sphinxteam/sir_inference).
+1. The instances of ```OpenABM``` are generated with [OpenABM]() github repository gentle provided by [Luca Ferretti](https://www.bdi.ox.ac.uk/Team/luca-ferretti).
 
 
 ## Mainteiners:
