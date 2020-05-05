@@ -22,6 +22,11 @@ For reference and for convenience, a Python script can be found in the `lib` fol
 ## Results
 In the folder ```results``` are the results obtained by various techniques on the instances proposed. If you want to add yours results make a pull request or write us: [sybil-team](mailto:sibylteam@gmail.com?subject=[GitHub]%20Source%20epibench).
 
+### list of results:
+* OpenABM instances: 
+    * T_25: [results](epibench/results/OpenABM/T_25/results.ipynb) of [sib]() and local tracing algorithm.
+    * T_35: [results]() of [sib](epibench/results/OpenABM/T_35/results.ipynb) and local tracing algorithm.
+
 
 ## Credits:
 
