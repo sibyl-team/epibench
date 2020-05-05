@@ -20,7 +20,7 @@ The data format is specified in the [README](./data/README.md) in the folder ```
 For reference and for convenience, a Python script can be found in the `lib` folder which can be used to save and load the different instances.
 
 ## Results
-In the folder ```results``` are the results obtained by various techniques on the instances proposed. If you want to add yours results make a pull request or write us: [sybil-team](mailto:sibylteam@gmail.com?subject=[GitHub]%20Source%20epibench).
+In the folder ```results``` are the results obtained by various techniques on the instances proposed. If you want to add yours  make a pull request or write us: [sybil-team](mailto:sibylteam@gmail.com?subject=[GitHub]%20Source%20epibench).
 
 ### list of results:
 * OpenABM instances: 
