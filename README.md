@@ -24,8 +24,8 @@ In the folder ```results``` are the results obtained by various techniques on th
 
 ### list of results:
 * OpenABM instances: 
-    * T_25: [results](epibench/results/OpenABM/T_25/results.ipynb) of [sib]() and local tracing algorithm.
-    * T_35: [results]() of [sib](epibench/results/OpenABM/T_35/results.ipynb) and local tracing algorithm.
+    * T_25: [results](results/OpenABM/T_25/results.ipynb) of [sib]() and local tracing algorithm.
+    * T_35: [results]() of [sib](results/OpenABM/T_35/results.ipynb) and local tracing algorithm.
 
 
 ## Credits:
