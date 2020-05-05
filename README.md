@@ -1,7 +1,7 @@
 # epibench
 The evolution of the 2019–20 coronavirus pandemic has made clear the need to quickly contain the outbreaks of infections. One of the strategies used is to trace the contacts of people found positive and quickly isolate the new infected founds. Governments and institutions are working to implement contact tracking through IT technologies and mobile apps. The purpose of this repository is to provide a common database where inference algorithms can be tested. The inference problems addressed rely on having detailed contacts information among individuals observed. We assume that compartmental models (like SIS, SIR, SEIR etc..) govern the dynamics of the systems. We provide several different instances for several different inference problems.
 
-## inference problems
+## Inference problems
 
 We provide a database of instances to address the following inference problems:
 
@@ -13,9 +13,11 @@ We provide a database of instances to address the following inference problems:
 
 1. More coming...
 
-## Database structures
+## Using the data
 
-See the [README](./data/README.md) in the folder ```./data/```
+The data format is specified in the [README](./data/README.md) in the folder ```./data/```
+
+For reference and for convenience, a Python script can be found in the `lib` folder which can be used to save and load the different instances.
 
 ## Results
 In the folder ```results``` are the results obtained by various techniques on the instances proposed. If you want to add yours results make a pull request or write us: [sybil-team](mailto:sybilteam@gmail.com?subject=[GitHub]%20Source%20Han%20Sans).

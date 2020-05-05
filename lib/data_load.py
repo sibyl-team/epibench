@@ -101,6 +101,14 @@ def convert_obs_to_json(df, name_state="st", name_t="t", name_node="i"):
             d[sname][ti] = list(grouptime[name_node])
     return d
 
+def convert_obs_to_json(df, name_state="st", name_t="t", name_node="i"):
+    d = {k: {} for k in STATE_MAP.keys()}
+    for si, grs in df.groupby(name_state):
+        sname = STATE_INVERSE_MAP[si]
+        for ti, grouptime in grs.groupby(name_t):
+            d[sname][ti] = list(grouptime[name_node])
+    return d
+
 def load_exported_data(folder_path, epidemies_with_name=False, obs_dataframe=True):
     """
     Load only the binary formatted files from folder "folder_path"
@@ -237,9 +245,6 @@ def save_data_exported(base_path, name_instance, pars, contacts,
 
     with bz2.open(folder/(CONTACTS_FNAME), "w") as f:
         np.savetxt(f, contacts, delimiter=",")
-    
-    print("contacts saved")
-    
     if obs_all_json is not None:
         with bz2.open(folder/(ALL_OBS_FILE), "wt") as f:
             json.dump(obs_all_json, f, indent=1)
@@ -247,7 +252,6 @@ def save_data_exported(base_path, name_instance, pars, contacts,
     title_epi = " ,".join(["{}".format(i) for i in range(num_nodes)])
 
     for i in range(num_inst):
-        print(i)
         epi = full_epidemies[i]
 
         tf = tarfile.open(folder/"instance_{:03d}.tar.bz2".format(i), "w:bz2")
@@ -256,8 +260,6 @@ def save_data_exported(base_path, name_instance, pars, contacts,
 
         np.savetxt(epidemy_name, epi, "%d", delimiter=",", header=title_epi)
         tf.add(epidemy_name)
-            
-        print("epidemy saved")
 
         if obs_all_df is not None:
             observ = obs_all_df[i]

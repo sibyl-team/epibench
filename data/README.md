@@ -60,7 +60,11 @@ Each row represents an observation, of node i, at time t, with state 'obs'.
 
   
 
-For convenience, they are also packed all together in a bzip2-compressed JSON file, in a nested tree structure, whose keys represent in the following order: instance -> state of observation (S, I or R) -> time of observation -> list of nodes with that state.
+For convenience, they are also packed all together in a bzip2-compressed JSON file, in a nested tree structure, whose keys represent in the following order: 
+
+instance -> state of observation (S, I or R) -> time of observation -> list of nodes with that state
+
+In some cases the top structure can be a list for practical convenience.
 
   
 
