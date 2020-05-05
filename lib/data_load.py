@@ -166,9 +166,11 @@ def load_instance(folder_path):
     epi = np.loadtxt(epidemy_name, dtype=np.int, delimiter="," )
     
     obs_list = []
-    for filename in os.listdir(fold):
-        if filename.startswith("observ"): 
-            obs_list.append(pd.read_csv(fold/filename))
+    count_num_obs = len([1 for filename in os.listdir(fold) if filename.startswith("observ")])
+    
+    for i_obs in range(count_num_obs):
+        name_file = f"observ{i_obs}.gz"
+        obs_list.append(pd.read_csv(fold/name_file))
     return params, contacts, epi, obs_list
 
 
