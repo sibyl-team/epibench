@@ -25,7 +25,7 @@ In the folder ```results``` are the results obtained by various techniques on th
 
 ## Credits:
 
-1. The instances of ```OpenABM``` are generated with [OpenABM]() github repository gentle provided by [Luca Ferretti](https://www.bdi.ox.ac.uk/Team/luca-ferretti).
+1. The instances of ```OpenABM``` are generated with [OpenABM]() github repository gently provided by [Luca Ferretti](https://www.bdi.ox.ac.uk/Team/luca-ferretti).
 
 
 ## Mainteiners:
