@@ -5,9 +5,9 @@ The evolution of the 2019–20 coronavirus pandemic has made clear the need to q
 
 We provide a database of instances to address the following inference problems:
 
-1. **Infer the current state of the individuals from partial observations.** The temporal list of contacts between individuals is known. A list of partial observations of the past state of individuals generate from simulated cascades are provided. The compartmental model that generate the epidemics cascade could be known or not. We want to infer the current states of individuals (at the last time of the dynamics) in order to identify the infected not yet tested.
+1. **Infer the current state of the individuals from partial observations.** The temporal list of contacts between individuals is known. A list of partial observations of the past state of individuals generate from simulated cascades are provided. The compartmental model that generates the epidemic cascade could be known or not. We want to infer the current states of individuals (at the last time of the dynamics) in order to identify the infected one among not yet tested individuals.
 
-1. **Patient zero problem.** The temporal list of contacts between individuals is known. A list of partial observations of the state of individuals generate from simulated cascades are provided.  The compartmental model that generate the epidemics cascade is known. We want to infer the sources of the epidemic observed.
+1. **Patient zero problem.** The temporal list of contacts between individuals is known. A list of partial observations of the state of individuals generated from simulated cascades is provided.  The compartmental model that generates the epidemic cascade is known. We want to infer the sources of the partially observed epidemic outbreak.
 
 1. **Inferring the parameter of the compartmental models** The temporal list of contacts between individuals is known. A list of partial observation of the state of individuals are provided. We want to infer the parameters of the compartmental model that generates the epidemic cascade.
 
