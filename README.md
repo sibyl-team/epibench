@@ -15,7 +15,7 @@ We provide a database of instances to address the following inference problems:
 
 ## Using the data
 
-The data format is specified in the [README](./data/README.md) in the folder ```./data/```
+The data format is specified in the [README](./data/README.md) file in the folder ```./data/```
 
 For reference and for convenience, a Python script can be found in the `lib` folder which can be used to save and load the different instances.
 
