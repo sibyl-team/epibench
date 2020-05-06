@@ -9,9 +9,9 @@ We provide a database of instances to address the following inference problems:
 
 1. **Patient zero problem.** The temporal list of contacts between individuals is known. A list of partial observations of the state of individuals generated from simulated cascades is provided.  The compartmental model that generates the epidemic cascade is known. We want to infer the sources of the partially observed epidemic outbreak.
 
-1. **Inferring the parameter of the compartmental models** The temporal list of contacts between individuals is known. A list of partial observation of the state of individuals are provided. We want to infer the parameters of the compartmental model that generates the epidemic cascade.
+1. **Inferring the parameter of the compartmental models** The temporal list of contacts between individuals is known. A list of partial observations of the states of individuals is provided. We want to infer the parameters of the compartmental model that generates the epidemic cascade.
 
-1. More coming...
+1. More to come...
 
 ## Using the data
 
