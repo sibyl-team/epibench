@@ -1,0 +1,14 @@
+{
+ "type_graph": "sp_work13",
+ "t_limit": 12,
+ "gamma": 0.015,
+ "mu": 0.1,
+ "seed": 6,
+ "n": 95,
+ "p_tested": 0.01,
+ "p_asymptomatic": 0.5,
+ "p_delay_symptoms": {
+  "1": 0.2,
+  "2": 0.8
+ }
+}
