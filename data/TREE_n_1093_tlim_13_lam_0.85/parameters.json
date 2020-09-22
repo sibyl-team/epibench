@@ -1,0 +1,14 @@
+{
+ "type_graph": "TREE",
+ "t_limit": 13,
+ "lambda": 0.85,
+ "mu": 0.3,
+ "seed": 9,
+ "n": 1093,
+ "p_tested": 0.01,
+ "p_asymptomatic": 0.5,
+ "p_delay_symptoms": {
+  "1": 0.7,
+  "2": 0.30000000000000004
+ }
+}
